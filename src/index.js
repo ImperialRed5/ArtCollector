@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 // These imports won't work until you fix ./components/index.js
-import { Feature, Loading, Preview, Search, Title } from "./components";
+// import { Feature, Loading, Preview, Search, Title } from "./components";
+import Feature from "./components/Feature";
+import Loading from "./components/Loading";
+import Preview from "./components/Preview";
+import Search from "./components/Search";
+import Title from "./components/Title";
 
 const App = () => {
   const [searchResults, setSearchResults] = useState({ info: {}, records: [] });
@@ -24,10 +29,20 @@ const App = () => {
       {/* <Search /> needs props for setIsLoading and setSearchResults (trigger <Loading /> on search start/end, and transfer results to preview)  */}
       <Search setIsLoading={setIsLoading} setSearchResults={setSearchResults} />
       {/* <Preview /> needs props for searchResults, setIsLoading and setSearchResults (clicking prev/next buttons), and setFeaturedResult (clicking a preview) */}
-      <Preview />
+      <Preview
+        searchResults={searchResults}
+        setIsLoading={setIsLoading}
+        setSearchResults={setSearchResults}
+        setFeaturedResult={setFeaturedResult}
+      />
       {/* <Feature /> needs props for featuredResult, as well as setIsLoading and setSearchResults (clicking on searchable properties) */}
-      <Feature />
-      <Loading /> {/* use a ternary and render null if isLoading is false */}
+      <Feature
+        featuredResult={featuredResult}
+        setIsLoading={setIsLoading}
+        setSearchResults={setSearchResults}
+      />
+      {isLoading ? <Loading /> : null}
+      {/* use a ternary and render null if isLoading is false */}
     </div>
   );
 };
