@@ -82,7 +82,6 @@ const Preview = ({
             </div>
           );
         })}
-
         {/* Here we should map over the records, and render something like this for each one:
           <div  
             key={ index }
